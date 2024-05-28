@@ -4413,6 +4413,7 @@ MonoBehaviour:
   playerRb: {fileID: 1207430881}
   playerMesh: {fileID: 828713979}
   recoilForce: 800
+  speedMultiplier: 1
 --- !u!136 &1207430884
 CapsuleCollider:
   m_ObjectHideFlags: 0
