@@ -13,9 +13,11 @@ public class Player : MonoBehaviour
 
     public float recoilForce;
 
+    public float speedMultiplier;
+
     public void MovePlayer(Vector3 direction)
     {
-        transform.position += direction * playerSpeed * Time.deltaTime;
+        transform.position += direction * playerSpeed * Time.deltaTime * speedMultiplier;
     }
     public void MakePlayerJump()
     {
@@ -30,6 +32,5 @@ public class Player : MonoBehaviour
     public void PushPlayerBack()
     {
         playerRb.AddForce(-playerMesh.transform.forward * recoilForce);
-        
     }
 }

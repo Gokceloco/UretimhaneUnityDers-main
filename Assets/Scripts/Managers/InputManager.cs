@@ -65,6 +65,14 @@ public class InputManager : MonoBehaviour
             {
                 gameDirector.enemyManager.SpawnWave();
             }
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                gameDirector.playerHolder.speedMultiplier = 1.6f;
+            }
+            if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                gameDirector.playerHolder.speedMultiplier = 1f;
+            }
         }        
     }
 }
