@@ -21,24 +21,22 @@ public class Enemy : MonoBehaviour
 
     private Rigidbody _rb;
 
+    public EnemyHealthBar enemyHealthBar;
+
     public void StartEnemy(Transform pTransform, EnemyManager eManager)
     {
         playerTransform = pTransform;
         enemyManager = eManager;
         _curHealth = startHealth;
         _rb = GetComponent<Rigidbody>();
-    }
 
+        enemyHealthBar.StartEnemyHealthBar(enemyManager.gameDirector);
+        enemyHealthBar.Hide();
+    }
     public void StartMoving()
     {
         isEnemyStarted = true;
     }    
-
-    public float GetHealthRatio()
-    {
-        return (float)_curHealth / startHealth;
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -57,12 +55,12 @@ public class Enemy : MonoBehaviour
             ReduceHealth(1);
         }
     }
-
     public void EnemyGotHit(int damage, Vector3 pushDirection, float pushPower)
     {
         ReduceHealth(damage);
         PushEnemy(pushDirection, pushPower);
         enemyManager.gameDirector.audioManager.PlayMetalImpactSFX();
+        UpdateHealthBar();
     }
     private void PushEnemy(Vector3 pushDirection, float pushPower)
     {
@@ -75,11 +73,24 @@ public class Enemy : MonoBehaviour
         {
             KillEnemy();
         }
-        print(GetHealthRatio());
     }
     private void KillEnemy()
     {
         enemyManager.EnemyDied(this);
+        enemyHealthBar.Hide();
         gameObject.SetActive(false);
+    }
+    private void UpdateHealthBar()
+    {
+        var healthRatio = GetHealthRatio();
+        if (healthRatio > 0) 
+        {
+            enemyHealthBar.Show();
+            enemyHealthBar.SetHealthRatio(healthRatio);
+        }
+    }
+    public float GetHealthRatio()
+    {
+        return (float)_curHealth / startHealth;
     }
 }

@@ -36,6 +36,8 @@ public class GameDirector : MonoBehaviour
 
     private Coroutine _loadShotgunCoroutine;
 
+    public Transform cameraTransform;
+
     private void Start()
     {
         ingameControlsLocked = true;
@@ -56,6 +58,7 @@ public class GameDirector : MonoBehaviour
         {
             turn.x += Input.GetAxis("Mouse X");
             turn.y += Input.GetAxis("Mouse Y");
+            turn.y = Mathf.Clamp(turn.y, -7f, 25f);
             playerHolder.RotatePlayer(turn);            
         }        
     }

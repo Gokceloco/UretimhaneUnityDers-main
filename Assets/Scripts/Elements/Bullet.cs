@@ -15,12 +15,10 @@ public class Bullet : MonoBehaviour
     [Header("Elements")]
     public MeshRenderer bulletMesh;
     public SphereCollider sphereCollider;
-
     private void Start()
     {
         _bulletStartTime = Time.time;
     }
-
     private void Update()
     {
         if (Time.time - _bulletStartTime > bulletTime)
@@ -32,14 +30,12 @@ public class Bullet : MonoBehaviour
             Move();
         }
     }
-
     void DestroyBullet()
     {
         bulletMesh.enabled = false;
         sphereCollider.enabled = false;
         Destroy(gameObject, 2f);
     }
-
     void Move()
     {
         transform.position += transform.forward * bulletSpeed * Time.deltaTime;
