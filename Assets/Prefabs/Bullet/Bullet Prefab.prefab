@@ -133,6 +133,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpeed: 50
   bulletTime: 0.15
+  damage: 1
+  pushPower: 100
   bulletMesh: {fileID: 65056309831699201}
   sphereCollider: {fileID: 3062214938970919273}
 --- !u!54 &725810512734837258

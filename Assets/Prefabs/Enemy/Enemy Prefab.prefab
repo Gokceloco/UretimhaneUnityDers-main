@@ -495,6 +495,8 @@ MonoBehaviour:
   leftWheel: {fileID: 5541450608776485807}
   rightWheel: {fileID: 5546609219637168015}
   wheelRotationSpeed: 2
+  startHealth: 10
+  _curHealth: 0
 --- !u!136 &9007566908868738581
 CapsuleCollider:
   m_ObjectHideFlags: 0
