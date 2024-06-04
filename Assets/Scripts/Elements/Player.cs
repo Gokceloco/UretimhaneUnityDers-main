@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
 {
     public GameDirector gameDirector;
 
+    public Weapon weapon;
+
     public float playerSpeed;
     public float jumpForce;
     public Rigidbody playerRb;

@@ -73,6 +73,7 @@ public class GameDirector : MonoBehaviour
         audioManager.PlayShotgunReloadSFX();
         yield return new WaitForSeconds(gunLoadTime);
         isShotgunLoaded = true;
+        playerHolder.weapon.ChangeTrajectoryMaterialsToLoaded();
     }
 
     public void StopLoadShotgunCoroutine()
@@ -98,6 +99,7 @@ public class GameDirector : MonoBehaviour
             audioManager.PlayShotgunShootSFX();
         }
         isShotgunLoaded = false;
+        playerHolder.weapon.ChangeTrajectoryMaterialsToUnloaded();
     }
 
     public void SpawnBullet()

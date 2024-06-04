@@ -1182,6 +1182,7 @@ GameObject:
   - component: {fileID: 364258342}
   - component: {fileID: 364258341}
   - component: {fileID: 364258340}
+  - component: {fileID: 364258343}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -1256,6 +1257,26 @@ Transform:
   - {fileID: 1368535055}
   m_Father: {fileID: 828713979}
   m_LocalEulerAnglesHint: {x: 8.713, y: 0, z: 0}
+--- !u!114 &364258343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 364258338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e483366100db60f43908cdf0772c32eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trajectoryLoadedMaterial: {fileID: 2100000, guid: e84dfe2997af3e4478d8a70fd490d4f9,
+    type: 2}
+  trajectoryUnloadedMaterial: {fileID: 2100000, guid: 60b0dee69568db145b55a12d955df91c,
+    type: 2}
+  trajectoryMeshRenderers:
+  - {fileID: 1457002195}
+  - {fileID: 1081298777}
+  - {fileID: 896476251}
 --- !u!4 &366582237 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 40dd8d8eeb960c347b6f8ae20601a71c,
@@ -4210,6 +4231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameDirector: {fileID: 1399620565}
+  weapon: {fileID: 364258343}
   playerSpeed: 8
   jumpForce: 300
   playerRb: {fileID: 1207430881}
