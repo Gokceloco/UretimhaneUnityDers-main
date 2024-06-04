@@ -12,6 +12,7 @@ public class GameDirector : MonoBehaviour
 
     public MainUI mainUI;
     public WinUI winUI;
+    public FailUI failUI;
 
     public Transform enemy;
     public Player playerHolder;
@@ -43,6 +44,7 @@ public class GameDirector : MonoBehaviour
         ingameControlsLocked = true;
         mainUI.Show();
         winUI.Hide();
+        failUI.Hide();
     }
 
     public void StartGame()
@@ -51,6 +53,7 @@ public class GameDirector : MonoBehaviour
         isGameStarted = true;
         enemyManager.SpawnWave();
         ingameControlsLocked = false;
+        playerHolder.StartPlayer();
     }
     void Update()
     {
@@ -119,6 +122,13 @@ public class GameDirector : MonoBehaviour
         ingameControlsLocked = true;
         Cursor.lockState = CursorLockMode.None;
         winUI.Show();
+    }
+
+    public void LevelFailed()
+    {
+        ingameControlsLocked = true;
+        Cursor.lockState = CursorLockMode.None;
+        failUI.Show();
     }
 
     public void DiamondCollected()

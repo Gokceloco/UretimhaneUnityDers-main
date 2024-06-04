@@ -16,14 +16,6 @@ public class EnemyWeapon : MonoBehaviour
         _enemy = enemy;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            TryShoot();
-        }
-    }
-
     public void TryShoot()
     {
         if (Time.time - _lastShootTime > attackRate)

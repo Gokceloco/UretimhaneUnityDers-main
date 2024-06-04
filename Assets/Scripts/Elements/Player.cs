@@ -17,6 +17,36 @@ public class Player : MonoBehaviour
 
     public float speedMultiplier;
 
+    public int startHealth;
+    private int _curHealth;
+
+    public void StartPlayer()
+    {
+        _curHealth = startHealth;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            PlayerGotHit(1);
+        }
+    }
+
+    public void PlayerGotHit(int damage)
+    {
+        ReduceHealth(damage);
+    }
+
+    void ReduceHealth(int damage)
+    {
+        _curHealth -= damage;
+        if (_curHealth <= 0)
+        {
+            gameDirector.LevelFailed();
+        }
+    }
+
     public void MovePlayer(Vector3 direction)
     {
         transform.position += direction * playerSpeed * Time.deltaTime * speedMultiplier;

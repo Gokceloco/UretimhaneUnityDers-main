@@ -40,4 +40,11 @@ public class EnemyBullet : MonoBehaviour
     {
         transform.position += transform.forward * bulletSpeed * Time.deltaTime;
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            other.GetComponent<Player>().PlayerGotHit(damage);
+        }
+    }
 }
