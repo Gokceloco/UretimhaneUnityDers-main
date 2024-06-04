@@ -96,6 +96,7 @@ public class GameDirector : MonoBehaviour
                 SpawnBullet();
             }
             playerHolder.PushPlayerBack();
+            enemyManager.AlarmEnemies();
             audioManager.PlayShotgunShootSFX();
         }
         isShotgunLoaded = false;

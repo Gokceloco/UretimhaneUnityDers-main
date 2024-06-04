@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 50
-  bulletTime: 0.15
+  bulletTime: 0.25
   damage: 1
   pushPower: 100
   bulletMesh: {fileID: 65056309831699201}

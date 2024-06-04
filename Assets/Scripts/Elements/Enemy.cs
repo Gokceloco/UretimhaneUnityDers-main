@@ -31,6 +31,8 @@ public class Enemy : MonoBehaviour
 
         enemyHealthBar.StartEnemyHealthBar(enemyManager.gameDirector);
         enemyHealthBar.Hide();
+
+        enemyWeapon.StartEnemyWeapon(this);
     }
     public void StartMoving()
     {
@@ -58,7 +60,8 @@ public class Enemy : MonoBehaviour
         }
         else if (enemyState == EnemyState.Shooting)
         {
-            
+            transform.LookAt(playerTransform.position);
+            enemyWeapon.TryShoot();
         }
     }
     private void MoveTowardsPlayer()

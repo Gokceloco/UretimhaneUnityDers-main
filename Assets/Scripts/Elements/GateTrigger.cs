@@ -14,7 +14,7 @@ public class GateTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            enemyManager.GateTriggered();
+            enemyManager.AlarmEnemies();
             GetComponent<BoxCollider>().enabled = false;
         }
     }

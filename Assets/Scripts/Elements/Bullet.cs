@@ -47,6 +47,11 @@ public class Bullet : MonoBehaviour
             other.GetComponent<Enemy>().EnemyGotHit(damage, transform.forward, pushPower);
             DestroyBullet();
         }
+        else if (other.CompareTag("EnemyBullet"))
+        {
+            Destroy(other.gameObject);
+            DestroyBullet();
+        }
         else if (other.CompareTag("MapObjects"))
         {
             DestroyBullet();

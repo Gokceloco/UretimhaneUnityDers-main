@@ -7,6 +7,9 @@ public class EnemyWeapon : MonoBehaviour
     private Enemy _enemy;
     public EnemyBullet enemyBulletPrefab;
     public List<Transform> shootPositions;
+    public float attackRate;
+
+    private float _lastShootTime;
 
     public void StartEnemyWeapon(Enemy enemy)
     {
@@ -17,17 +20,21 @@ public class EnemyWeapon : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.L))
         {
-            Shoot();
+            TryShoot();
         }
     }
 
-    void Shoot()
+    public void TryShoot()
     {
-        foreach (Transform sp in shootPositions)
+        if (Time.time - _lastShootTime > attackRate)
         {
-            var newBullet = Instantiate(enemyBulletPrefab);
-            newBullet.transform.position = sp.position;
-            newBullet.transform.LookAt(_enemy.playerTransform.position);
-        }
+            foreach (Transform sp in shootPositions)
+            {
+                var newBullet = Instantiate(enemyBulletPrefab);
+                newBullet.transform.position = sp.position;
+                newBullet.transform.LookAt(_enemy.playerTransform.position + Vector3.up * 1.5f);
+            }
+            _lastShootTime = Time.time;
+        }       
     }
 }
