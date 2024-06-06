@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FailUI : MonoBehaviour
 {
@@ -11,5 +12,9 @@ public class FailUI : MonoBehaviour
     public void Hide()
     {
         gameObject.SetActive(false);
+    }
+    public void RestartLevelButtonPressed()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

@@ -6,8 +6,7 @@ public class EnemyWeapon : MonoBehaviour
 {
     private Enemy _enemy;
     public EnemyBullet enemyBulletPrefab;
-    public List<Transform> shootPositions;
-    public float attackRate;
+    public List<Transform> shootPositions;    
 
     private float _lastShootTime;
 
@@ -18,7 +17,7 @@ public class EnemyWeapon : MonoBehaviour
 
     public void TryShoot()
     {
-        if (Time.time - _lastShootTime > attackRate)
+        if (Time.time - _lastShootTime > _enemy.attackRate)
         {
             foreach (Transform sp in shootPositions)
             {

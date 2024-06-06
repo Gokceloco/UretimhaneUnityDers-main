@@ -560,6 +560,7 @@ MonoBehaviour:
   enemyHealthBar: {fileID: 5401259216816384358}
   enemyWeapon: {fileID: 1510183840605508127}
   enemySpeed: 5
+  attackRate: 1
   wheelRotationSpeed: 2
   startHealth: 10
   shootDistance: 10
@@ -762,7 +763,6 @@ MonoBehaviour:
   shootPositions:
   - {fileID: 2901336702855138280}
   - {fileID: 5726526773286003536}
-  attackRate: 1
 --- !u!4 &5546609219637168015 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4905688991736352, guid: 4efdc095f88074e53a4f28617077b108,

@@ -5,38 +5,24 @@ using UnityEngine;
 
 public class GameDirector : MonoBehaviour
 {
+    [Header("Managers")]
     public InputManager inputManager;
     public EnemyManager enemyManager;
     public DiamondManager diamondManager;
     public AudioManager audioManager;
+    public FXManager fxManager;
+    public Settings settings;
+    public Player playerHolder;
 
+    [Header("UI")]
     public MainUI mainUI;
     public WinUI winUI;
     public FailUI failUI;
-
-    public Transform enemy;
-    public Player playerHolder;
-    public Rigidbody playerRb;
-
-    public Vector2 turn;
-
-    public Bullet bulletPrefab;
-    public Transform bulletSpawnPoint;
+    public HealthBarUI healthBarUI;
+    public GetHitUI getHitUI;    
 
     public bool isGameStarted;
-
-    public int bulletCount;
-
-    public float maxSpread;
-
     public bool ingameControlsLocked;
-
-    public bool isShotgunLoaded;
-
-    public float gunLoadTime;
-
-    private Coroutine _loadShotgunCoroutine;
-
     public Transform cameraTransform;
 
     private void Start()
@@ -54,74 +40,14 @@ public class GameDirector : MonoBehaviour
         enemyManager.SpawnWave();
         ingameControlsLocked = false;
         playerHolder.StartPlayer();
-    }
-    void Update()
-    {
-        if (isGameStarted && !ingameControlsLocked)
-        {
-            turn.x += Input.GetAxis("Mouse X");
-            turn.y += Input.GetAxis("Mouse Y");
-            turn.y = Mathf.Clamp(turn.y, -7f, 25f);
-            playerHolder.RotatePlayer(turn);            
-        }        
-    }
-
-    public void StartLoadingShotgun()
-    {
-        _loadShotgunCoroutine = StartCoroutine(LoadShotgunCoroutine());
-    }
-
-    IEnumerator LoadShotgunCoroutine()
-    {
-        audioManager.PlayShotgunReloadSFX();
-        yield return new WaitForSeconds(gunLoadTime);
-        isShotgunLoaded = true;
-        playerHolder.weapon.ChangeTrajectoryMaterialsToLoaded();
-    }
-
-    public void StopLoadShotgunCoroutine()
-    {
-        if (_loadShotgunCoroutine != null)
-        {
-            StopCoroutine(_loadShotgunCoroutine);
-        }
-        audioManager.StopShotgunReloadSFX();
-    }
-
-    public void TrySpawnBullets()
-    {
-        if (isShotgunLoaded)
-        {
-            for (int i = 0;
-            i < bulletCount;
-            i++)
-            {
-                SpawnBullet();
-            }
-            playerHolder.PushPlayerBack();
-            enemyManager.AlarmEnemies();
-            audioManager.PlayShotgunShootSFX();
-        }
-        isShotgunLoaded = false;
-        playerHolder.weapon.ChangeTrajectoryMaterialsToUnloaded();
-    }
-
-    public void SpawnBullet()
-    {
-        var spread = new Vector3(
-            Random.Range(-maxSpread,maxSpread),
-            Random.Range(-maxSpread * .4f, maxSpread * .4f),
-            Random.Range(-maxSpread, maxSpread));
-
-        var newBullet = Instantiate(bulletPrefab);
-        newBullet.transform.position = bulletSpawnPoint.position;
-        newBullet.transform.LookAt(bulletSpawnPoint.position + bulletSpawnPoint.forward + spread);
-    }
+        healthBarUI.Show();
+    }    
     public void LevelCompleted()
     {
         ingameControlsLocked = true;
         Cursor.lockState = CursorLockMode.None;
         winUI.Show();
+        healthBarUI.Hide();
     }
 
     public void LevelFailed()
@@ -129,6 +55,7 @@ public class GameDirector : MonoBehaviour
         ingameControlsLocked = true;
         Cursor.lockState = CursorLockMode.None;
         failUI.Show();
+        healthBarUI.Hide();
     }
 
     public void DiamondCollected()

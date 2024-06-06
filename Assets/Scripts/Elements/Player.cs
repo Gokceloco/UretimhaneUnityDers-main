@@ -5,11 +5,10 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public GameDirector gameDirector;
+    public Settings settings;
 
     public Weapon weapon;
 
-    public float playerSpeed;
-    public float jumpForce;
     public Rigidbody playerRb;
     public Transform playerMesh;
 
@@ -23,6 +22,7 @@ public class Player : MonoBehaviour
     public void StartPlayer()
     {
         _curHealth = startHealth;
+        gameDirector.healthBarUI.SetPlayerHealthBar(1);
     }
 
     private void Update()
@@ -32,12 +32,17 @@ public class Player : MonoBehaviour
             PlayerGotHit(1);
         }
     }
-
     public void PlayerGotHit(int damage)
     {
         ReduceHealth(damage);
+        gameDirector.healthBarUI.SetPlayerHealthBar(GetHealthRatio());
+        gameDirector.getHitUI.ShowDamageEffect();
+        gameDirector.healthBarUI.FlashBorder();
     }
-
+    public float GetHealthRatio()
+    {
+        return (float)_curHealth / startHealth;
+    }
     void ReduceHealth(int damage)
     {
         _curHealth -= damage;
@@ -49,11 +54,11 @@ public class Player : MonoBehaviour
 
     public void MovePlayer(Vector3 direction)
     {
-        transform.position += direction * playerSpeed * Time.deltaTime * speedMultiplier;
+        transform.position += direction * settings.playerSpeed * Time.deltaTime * speedMultiplier;
     }
     public void MakePlayerJump()
     {
-        playerRb.AddForce(new Vector3(0, 1, 0) * jumpForce);
+        playerRb.AddForce(new Vector3(0, 1, 0) * settings.jumpPower);
     }
 
     public void RotatePlayer(Vector2 turn)

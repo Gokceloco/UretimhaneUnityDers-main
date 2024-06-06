@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -19,6 +20,7 @@ public class Enemy : MonoBehaviour
 
     [Header("Properties")]
     public float enemySpeed;
+    public float attackRate;
     public float wheelRotationSpeed;
     public int startHealth;
     public float shootDistance;
@@ -33,11 +35,7 @@ public class Enemy : MonoBehaviour
         enemyHealthBar.Hide();
 
         enemyWeapon.StartEnemyWeapon(this);
-    }
-    public void StartMoving()
-    {
-        isEnemyStarted = true;
-    }    
+    }  
     // Update is called once per frame
     void Update()
     {
@@ -63,6 +61,10 @@ public class Enemy : MonoBehaviour
             transform.LookAt(playerTransform.position);
             enemyWeapon.TryShoot();
         }
+    }
+    public void StartMoving()
+    {
+        isEnemyStarted = true;
     }
     private void MoveTowardsPlayer()
     {
@@ -94,6 +96,7 @@ public class Enemy : MonoBehaviour
     }
     private void KillEnemy()
     {
+        enemyManager.gameDirector.fxManager.PlayExplosionFX(transform.position + Vector3.up);
         enemyManager.EnemyDied(this);
         enemyHealthBar.Hide();
         gameObject.SetActive(false);
