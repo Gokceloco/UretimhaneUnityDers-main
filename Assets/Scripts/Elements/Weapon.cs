@@ -31,7 +31,10 @@ public class Weapon : MonoBehaviour
                 SpawnBullet();
             }
             player.PushPlayerBack();
-            player.gameDirector.enemyManager.AlarmEnemies();
+            if (settings.shootingAlarmEnemies)
+            {
+                player.gameDirector.enemyManager.AlarmEnemies();
+            }
             muzzlePS.Play();
             player.gameDirector.audioManager.PlayShotgunShootSFX();
         }

@@ -1463,7 +1463,6 @@ Transform:
   m_LocalScale: {x: 0.1544, y: 0.17767999, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1694183150}
   - {fileID: 1326638386}
   - {fileID: 1368535055}
   m_Father: {fileID: 828713979}
@@ -5086,7 +5085,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0.508}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1694183150}
   m_Father: {fileID: 364258342}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1350029308
@@ -5954,6 +5954,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3e6b367b33b24b4aaad429b2101327c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootingAlarmEnemies: 0
   playerSpeed: 10
   jumpPower: 300
   gunLoadTime: 0.35
@@ -7037,7 +7038,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 364258342}
+    m_TransformParent: {fileID: 1326638386}
     m_Modifications:
     - target: {fileID: 100002, guid: 0661276422528d74d8c9894abad93242, type: 3}
       propertyPath: m_IsActive
@@ -7093,11 +7094,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 0661276422528d74d8c9894abad93242, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.508
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 0661276422528d74d8c9894abad93242, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.0000002950279
+      value: 0.00000029502792
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 0661276422528d74d8c9894abad93242, type: 3}
       propertyPath: m_LocalRotation.x
@@ -7173,7 +7174,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19800004, guid: 0661276422528d74d8c9894abad93242, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 0.15
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 19800006, guid: 0661276422528d74d8c9894abad93242, type: 3}
       propertyPath: playOnAwake
@@ -7187,7 +7188,8 @@ PrefabInstance:
       propertyPath: InitialModule.startLifetime.scalar
       value: 0.15
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11400002, guid: 0661276422528d74d8c9894abad93242, type: 3}
     m_RemovedGameObjects:
     - {fileID: 100002, guid: 0661276422528d74d8c9894abad93242, type: 3}
     m_AddedGameObjects: []
