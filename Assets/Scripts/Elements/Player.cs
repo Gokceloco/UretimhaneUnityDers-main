@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
 
     public bool isTouchingGround;
 
+    public ObjectDetector objectDetector;
+
     public void StartPlayer()
     {
         _curHealth = startHealth;
@@ -34,6 +36,8 @@ public class Player : MonoBehaviour
         {
             GetHealed();
             collision.gameObject.SetActive(false);
+            gameDirector.fxManager.PlayHealCollectedFX(collision.transform.position);
+            gameDirector.audioManager.PlayHealSFX();
         }
     }
 

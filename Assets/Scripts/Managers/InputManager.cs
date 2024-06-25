@@ -71,10 +71,6 @@ public class InputManager : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                 Cursor.lockState = CursorLockMode.None;
             }
-            if (Input.GetKeyDown(KeyCode.P))
-            {
-                gameDirector.enemyManager.SpawnWave();
-            }
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
                 gameDirector.playerHolder.speedMultiplier = 1.6f;
@@ -82,6 +78,13 @@ public class InputManager : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.LeftShift))
             {
                 gameDirector.playerHolder.speedMultiplier = 1f;
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                if (gameDirector.playerHolder.objectDetector.isTouchingDoor)
+                {
+                    gameDirector.playerHolder.objectDetector.OpenDoor();
+                }
             }
         }        
     }

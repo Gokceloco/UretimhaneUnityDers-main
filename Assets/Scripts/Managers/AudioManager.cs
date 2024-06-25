@@ -7,6 +7,7 @@ public class AudioManager : MonoBehaviour
     public AudioSource shotgunReloadAS;
     public AudioSource shotgunShootAS;
     public AudioSource metalImpactAS;
+    public AudioSource healAS;
 
     public void PlayShotgunReloadSFX()
     {
@@ -23,5 +24,9 @@ public class AudioManager : MonoBehaviour
     public void PlayMetalImpactSFX()
     {
         metalImpactAS.Play();
+    }
+    public void PlayHealSFX()
+    {
+        healAS.Play();
     }
 }

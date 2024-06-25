@@ -49,7 +49,7 @@ public class EnemyManager : MonoBehaviour
         {
             gameDirector.diamondManager.SpawnDiamonds();
         }
-        if (Random.value < .5f)
+        if (Random.value < gameDirector.settings.healSpawnChance)
         {
             SpawnPowerUp(e);
         }
@@ -60,5 +60,6 @@ public class EnemyManager : MonoBehaviour
         var newPowerUp = Instantiate(healPowerUpPrefab);
         newPowerUp.transform.position = e.transform.position + Vector3.up;
         newPowerUp.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-200,200), 200, Random.Range(-200, 200)));
+        newPowerUp.StartPowerUp(gameDirector.playerHolder);
     }
 }
