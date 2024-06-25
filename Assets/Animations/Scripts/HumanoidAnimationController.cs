@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HumanoidAnimationController : MonoBehaviour
 {
+    public GameDirector gameDirector;
     public bool isRunning;
     public Animator animator;
 
@@ -14,7 +15,7 @@ public class HumanoidAnimationController : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W))
         {
             if (Input.GetKey(KeyCode.A))
             {
@@ -29,20 +30,35 @@ public class HumanoidAnimationController : MonoBehaviour
                 SetTriggerRunning(0);
             }
         }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            if (Input.GetKey(KeyCode.A))
+            {
+                SetTriggerRunning(.375f);
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                SetTriggerRunning(.625f);
+            }
+            else
+            {
+                SetTriggerRunning(.5f);
+            }            
+        }
         else
         {
             if (Input.GetKey(KeyCode.A))
             {
                 SetTriggerRunning(.25f);
             }
-            if (Input.GetKey(KeyCode.S))
-            {
-                SetTriggerRunning(.5f);
-            }
             if (Input.GetKey(KeyCode.D))
             {
                 SetTriggerRunning(.75f);
             }
+        }
+        if (Input.GetKeyDown(KeyCode.Space) && gameDirector.playerHolder.isTouchingGround)
+        {
+            animator.SetTrigger("Jump");
         }
         if (!isRunning)
         {

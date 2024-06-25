@@ -9,6 +9,8 @@ public class EnemyManager : MonoBehaviour
 
     public Enemy enemyPrefab;
 
+    public PowerUp healPowerUpPrefab;
+
     public List<Enemy> activeEnemies = new List<Enemy>();
 
     public void AlarmEnemies()
@@ -47,5 +49,16 @@ public class EnemyManager : MonoBehaviour
         {
             gameDirector.diamondManager.SpawnDiamonds();
         }
+        if (Random.value < .5f)
+        {
+            SpawnPowerUp(e);
+        }
+    }
+
+    private void SpawnPowerUp(Enemy e)
+    {
+        var newPowerUp = Instantiate(healPowerUpPrefab);
+        newPowerUp.transform.position = e.transform.position + Vector3.up;
+        newPowerUp.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-200,200), 200, Random.Range(-200, 200)));
     }
 }

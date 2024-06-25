@@ -20,6 +20,14 @@ public class Weapon : MonoBehaviour
 
     public ParticleSystem muzzlePS;
 
+    public Transform handTransform;
+
+    public Vector3 handOffset;
+
+    private void Update()
+    {
+        transform.position = handTransform.position + handOffset;
+    }
     public void TrySpawnBullets()
     {
         if (isShotgunLoaded)
@@ -92,7 +100,7 @@ public class Weapon : MonoBehaviour
         {
             mr.material = trajectoryUnloadedMaterial;
             mr.transform.DOKill();
-            mr.transform.localScale = new Vector3 (1, 1, .17f);
+            mr.transform.localScale = Vector3.one * .18f;
         }
     }
 }

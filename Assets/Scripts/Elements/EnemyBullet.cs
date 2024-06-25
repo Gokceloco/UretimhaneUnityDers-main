@@ -34,6 +34,7 @@ public class EnemyBullet : MonoBehaviour
     {
         bulletMesh.enabled = false;
         sphereCollider.enabled = false;
+        gameObject.SetActive(false);
         Destroy(gameObject, 2f);
     }
     void Move()
@@ -45,6 +46,11 @@ public class EnemyBullet : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.GetComponent<Player>().PlayerGotHit(damage);
+            DestroyBullet();
+        }
+        if (other.CompareTag("MapObjects"))
+        {
+            DestroyBullet();
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,10 +20,47 @@ public class Player : MonoBehaviour
     public int startHealth;
     private int _curHealth;
 
+    public bool isTouchingGround;
+
     public void StartPlayer()
     {
         _curHealth = startHealth;
         gameDirector.healthBarUI.SetPlayerHealthBar(1);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Heal"))
+        {
+            GetHealed();
+            collision.gameObject.SetActive(false);
+        }
+    }
+
+    private void GetHealed()
+    {
+        _curHealth += Mathf.RoundToInt(startHealth * .5f);
+        if (_curHealth > startHealth)
+        {
+            _curHealth = startHealth;
+        }
+        gameDirector.healthBarUI.SetPlayerHealthBar(GetHealthRatio());
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("MapObjects"))
+        {
+            isTouchingGround = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("MapObjects"))
+        {
+            isTouchingGround = false;
+        }
     }
 
     private void Update()
