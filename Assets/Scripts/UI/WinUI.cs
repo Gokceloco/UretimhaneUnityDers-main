@@ -17,6 +17,6 @@ public class WinUI : MonoBehaviour
     public void LoadNextLevelButtonPressed()
     {
         Hide();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(gameDirector.desiredLevel);
     }
 }

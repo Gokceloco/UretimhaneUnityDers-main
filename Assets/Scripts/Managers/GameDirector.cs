@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameDirector : MonoBehaviour
 {
@@ -26,8 +27,17 @@ public class GameDirector : MonoBehaviour
     public bool ingameControlsLocked;
     public Transform cameraTransform;
 
+    public int desiredLevel;
+
     private void Start()
     {
+        var curLevel = SceneManager.GetActiveScene().buildIndex;
+        
+        if (curLevel != desiredLevel)
+        {
+            SceneManager.LoadScene(desiredLevel);
+        }
+        
         ingameControlsLocked = true;
         mainUI.Show();
         winUI.Hide();
@@ -49,6 +59,7 @@ public class GameDirector : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         winUI.Show();
         healthBarUI.Hide();
+        desiredLevel += 1;
     }
 
     public void LevelFailed()

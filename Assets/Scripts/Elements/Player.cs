@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
 
     public ObjectDetector objectDetector;
 
+    public bool isKeyCollected;
+
     public void StartPlayer()
     {
         _curHealth = startHealth;
@@ -39,6 +41,17 @@ public class Player : MonoBehaviour
             gameDirector.fxManager.PlayHealCollectedFX(collision.transform.position);
             gameDirector.audioManager.PlayHealSFX();
         }
+        if (collision.gameObject.CompareTag("Key"))
+        {
+            CollectKey();
+            collision.gameObject.SetActive(false);
+        }
+    }
+
+    private void CollectKey()
+    {
+        isKeyCollected = true;
+        gameDirector.messageUI.ShowKeyImage();
     }
 
     private void GetHealed()

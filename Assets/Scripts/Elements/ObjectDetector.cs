@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,7 +20,7 @@ public class ObjectDetector : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position + rayStartOffset, transform.forward, out hit, touchRange))
         {
-            if (hit.transform.CompareTag("Door"))
+            if (hit.transform.CompareTag("Door") && !hit.transform.GetComponentInParent<Door>().isDoorOpened)
             {
                 isTouchingDoor = true;
                 touchingDoor = hit.transform.GetComponentInParent<Door>();
@@ -30,6 +31,7 @@ public class ObjectDetector : MonoBehaviour
                 isTouchingDoor = false;
                 touchingDoor = null;
                 gameDirector.messageUI.HideOpenDoorMessage();
+                gameDirector.messageUI.HideDoorIsLockedMessage();
             }
         }
         else
@@ -37,12 +39,21 @@ public class ObjectDetector : MonoBehaviour
             isTouchingDoor = false;
             touchingDoor = null;
             gameDirector.messageUI.HideOpenDoorMessage();
+            gameDirector.messageUI.HideDoorIsLockedMessage();
         }
     }
     public void OpenDoor()
     {
         touchingDoor.Open();
+        if (touchingDoor.isDoorLocked)
+        {
+            UseKey();
+        }
     }
 
-
+    private void UseKey()
+    {
+        gameDirector.messageUI.HideKeyImage();
+        gameDirector.playerHolder.isKeyCollected = false;
+    }
 }

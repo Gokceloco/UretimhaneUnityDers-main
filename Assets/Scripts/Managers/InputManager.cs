@@ -83,7 +83,15 @@ public class InputManager : MonoBehaviour
             {
                 if (gameDirector.playerHolder.objectDetector.isTouchingDoor)
                 {
-                    gameDirector.playerHolder.objectDetector.OpenDoor();
+                    if (!gameDirector.playerHolder.objectDetector.touchingDoor.isDoorLocked 
+                        || gameDirector.playerHolder.isKeyCollected)
+                    {
+                        gameDirector.playerHolder.objectDetector.OpenDoor();
+                    }
+                    else
+                    {
+                        gameDirector.messageUI.ShowDoorIsLockedMessage();
+                    }
                 }
             }
         }        
