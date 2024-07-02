@@ -13,10 +13,9 @@ public class MainUI : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
-
-    public void StartGameButtonPressed()
+    public void StartLevelButtonPressed(int levelNo) 
     {
         Hide();
-        gameDirector.StartGame();
+        gameDirector.StartGame(levelNo);
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class WinUI : MonoBehaviour
+public class AdminUI : MonoBehaviour
 {
     public GameDirector gameDirector;
     public void Show()
@@ -14,10 +14,11 @@ public class WinUI : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
-    public void LoadNextLevelButtonPressed()
+
+    public void ResetProgressButtonPressed()
     {
         Hide();
-        gameDirector.playerHolder.ResetPosition();
-        gameDirector.mainUI.Show();
+        PlayerPrefs.SetInt("LastLevelReached", 0);
+        SceneManager.LoadScene(0);
     }
 }

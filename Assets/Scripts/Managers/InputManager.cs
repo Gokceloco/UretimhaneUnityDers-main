@@ -63,7 +63,7 @@ public class InputManager : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.F1))
             {
-                gameDirector.mainUI.Show();
+                gameDirector.adminUI.Show();
                 Cursor.lockState = CursorLockMode.None;
             }
             if (Input.GetKeyDown(KeyCode.F5))

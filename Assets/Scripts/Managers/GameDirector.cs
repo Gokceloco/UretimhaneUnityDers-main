@@ -14,6 +14,7 @@ public class GameDirector : MonoBehaviour
     public FXManager fxManager;
     public Settings settings;
     public Player playerHolder;
+    public LevelManager levelManager;
 
     [Header("UI")]
     public MainUI mainUI;
@@ -22,6 +23,7 @@ public class GameDirector : MonoBehaviour
     public HealthBarUI healthBarUI;
     public GetHitUI getHitUI;    
     public MessageUI messageUI;
+    public AdminUI adminUI;
 
     public bool isGameStarted;
     public bool ingameControlsLocked;
@@ -31,27 +33,24 @@ public class GameDirector : MonoBehaviour
 
     private void Start()
     {
-        var curLevel = SceneManager.GetActiveScene().buildIndex;
-        
-        if (curLevel != desiredLevel)
-        {
-            SceneManager.LoadScene(desiredLevel);
-        }
-        
         ingameControlsLocked = true;
         mainUI.Show();
         winUI.Hide();
         failUI.Hide();
     }
 
-    public void StartGame()
+    public void StartGame(int levelNo)
     {
+        levelManager.ClearCurrentLevel();
+        levelManager.CreateLevel(levelNo);
         Cursor.lockState = CursorLockMode.Locked;
         isGameStarted = true;
         enemyManager.SpawnWave();
         ingameControlsLocked = false;
         playerHolder.StartPlayer();
         healthBarUI.Show();
+        diamondManager.StartDiamondManager();
+        playerHolder.ResetRigidBodyConstraints();
     }    
     public void LevelCompleted()
     {
@@ -59,7 +58,7 @@ public class GameDirector : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         winUI.Show();
         healthBarUI.Hide();
-        desiredLevel += 1;
+        playerHolder.FreezePlayerYAxis();
     }
 
     public void LevelFailed()
@@ -68,6 +67,7 @@ public class GameDirector : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         failUI.Show();
         healthBarUI.Hide();
+        playerHolder.FreezePlayerYAxis();
     }
 
     public void DiamondCollected()

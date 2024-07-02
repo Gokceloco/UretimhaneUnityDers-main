@@ -32,6 +32,11 @@ public class Player : MonoBehaviour
         gameDirector.healthBarUI.SetPlayerHealthBar(1);
     }
 
+    public void ResetPosition()
+    {
+        transform.position = Vector3.zero;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Heal"))
@@ -46,6 +51,16 @@ public class Player : MonoBehaviour
             CollectKey();
             collision.gameObject.SetActive(false);
         }
+    }
+
+    public void ResetRigidBodyConstraints()
+    {
+        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+    }
+
+    public void FreezePlayerYAxis()
+    {
+        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY;
     }
 
     private void CollectKey()
